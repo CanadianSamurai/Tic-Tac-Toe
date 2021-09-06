@@ -1,31 +1,43 @@
 const gameBoard = (function () {
 	//private Method
 	let _gameBoardTicks = [];
-	let _gameBoardPosition = [];
-
 	let _gameBoardPositionX = [];
 	let _gameBoardPositionO = [];
 
 	function storePosition(boxId, xO) {
 		if (xO == 'o') {
 			_gameBoardPositionO.push(boxId);
-			console.log('o');
 		} else {
 			_gameBoardPositionX.push(boxId);
-			console.log('x');
 		}
-	}
-
-	function infoGameBoardTicks() {
-		return _gameBoardTicks;
 	}
 
 	function pushToGameBoardTicks(input) {
 		_gameBoardTicks.push(input);
 	}
 
+	function infoGameBoardTicks() {
+		return _gameBoardTicks;
+	}
+
+	function infoGameBoardPositionX() {
+		const sortedNum = _gameBoardPositionX.sort();
+		return sortedNum;
+	}
+
+	function infoGameBoardPositionO() {
+		const sortedNum = _gameBoardPositionO.sort();
+		return sortedNum;
+	}
+
 	//public Method
-	return { storePosition, infoGameBoardTicks, pushToGameBoardTicks };
+	return {
+		storePosition,
+		infoGameBoardTicks,
+		pushToGameBoardTicks,
+		infoGameBoardPositionO,
+		infoGameBoardPositionX,
+	};
 })();
 
 const displayController = (function () {
@@ -45,6 +57,10 @@ const displayController = (function () {
 
 		gameBoard.pushToGameBoardTicks(xO);
 		displayTick(xO, boxId);
+		winCondition(
+			gameBoard.infoGameBoardPositionX(),
+			gameBoard.infoGameBoardPositionO()
+		);
 	}
 	function xOLogic() {
 		if (
@@ -63,7 +79,36 @@ const displayController = (function () {
 		box.textContent = xO;
 	}
 
-	function winCondition() {}
+	function winCondition(x, o) {
+		console.log('O: ' + gameBoard.infoGameBoardPositionO());
+
+		console.log('X: ' + gameBoard.infoGameBoardPositionX());
+
+		const winCondition = [
+			[1, 2, 3],
+			[4, 5, 6],
+			[7, 8, 9],
+
+			[1, 4, 7],
+			[2, 5, 8],
+			[3, 6, 9],
+
+			[1, 5, 9],
+			[3, 5, 7],
+		];
+
+		for (let i = 0; i < winCondition.length; i++) {
+			//NEEDS FIX, dont compare exactly, filter()
+			if (winCondition[i].toString() == x.toString()) {
+				return console.log('x player wins');
+			}
+		}
+		for (let i = 0; i < winCondition.length; i++) {
+			if (winCondition[i].toString() == o.toString()) {
+				return console.log('o player wins');
+			}
+		}
+	}
 
 	//public Method
 	return { assignPosition };
