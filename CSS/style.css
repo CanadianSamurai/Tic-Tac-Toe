@@ -1,0 +1,11 @@
+#game-board {
+	background: turquoise;
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	height: 600px;
+	width: 600px;
+}
+
+.board-box {
+	border: 1px solid black;
+}
