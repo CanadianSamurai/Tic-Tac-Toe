@@ -3,8 +3,17 @@ const gameBoard = (function () {
 	let _gameBoardTicks = [];
 	let _gameBoardPosition = [];
 
-	function logPosition(boxId) {
-		_gameBoardPosition.push(boxId);
+	let _gameBoardPositionX = [];
+	let _gameBoardPositionO = [];
+
+	function storePosition(boxId, xO) {
+		if (xO == 'o') {
+			_gameBoardPositionO.push(boxId);
+			console.log('o');
+		} else {
+			_gameBoardPositionX.push(boxId);
+			console.log('x');
+		}
 	}
 
 	function infoGameBoardTicks() {
@@ -13,11 +22,10 @@ const gameBoard = (function () {
 
 	function pushToGameBoardTicks(input) {
 		_gameBoardTicks.push(input);
-		console.log(_gameBoardTicks);
 	}
 
 	//public Method
-	return { logPosition, infoGameBoardTicks, pushToGameBoardTicks };
+	return { storePosition, infoGameBoardTicks, pushToGameBoardTicks };
 })();
 
 const displayController = (function () {
@@ -32,10 +40,11 @@ const displayController = (function () {
 		if (e.target.textContent) {
 			return;
 		}
-		gameBoard.logPosition(boxId);
-		const xOrO = xOLogic();
-		gameBoard.pushToGameBoardTicks(xOrO);
-		displayTick(xOrO, boxId);
+		const xO = xOLogic();
+		gameBoard.storePosition(boxId, xO);
+
+		gameBoard.pushToGameBoardTicks(xO);
+		displayTick(xO, boxId);
 	}
 	function xOLogic() {
 		if (
@@ -49,10 +58,13 @@ const displayController = (function () {
 			return 'x';
 		}
 	}
-	function displayTick(xOrO, boxId) {
+	function displayTick(xO, boxId) {
 		const box = document.getElementById(boxId);
-		box.textContent = xOrO;
+		box.textContent = xO;
 	}
+
+	function winCondition() {}
+
 	//public Method
 	return { assignPosition };
 })();
