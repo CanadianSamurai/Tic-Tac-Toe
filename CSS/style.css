@@ -1,11 +1,16 @@
+body {
+}
 #game-board {
+	margin: auto;
+	margin-top: 100px;
 	background: turquoise;
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr;
-	height: 600px;
-	width: 600px;
+	height: 400px;
+	width: 400px;
 }
 
 .board-box {
 	border: 1px solid black;
+	text-align: center;
 }
