@@ -1,3 +1,5 @@
+//only using modular functions
+
 const gameBoard = (function () {
 	//private Method
 	let _gameBoardTicks = [];
@@ -42,8 +44,8 @@ const gameBoard = (function () {
 
 const displayController = (function () {
 	//private Method
-	const boxes = document.getElementsByClassName('board-box');
-	const listenToBoxes = Array.from(boxes).forEach(box => {
+	const boxes = Array.from(document.getElementsByClassName('board-box'));
+	const listenToBoxes = boxes.forEach(box => {
 		box.addEventListener('click', assignPosition);
 	});
 	function assignPosition(e) {
@@ -78,21 +80,14 @@ const displayController = (function () {
 		const box = document.getElementById(boxId);
 		box.textContent = xO;
 	}
-
 	function winCondition(x, o) {
-		console.log('O: ' + o);
-
-		console.log('X: ' + x);
-
 		const winCondition = [
 			[1, 2, 3],
 			[4, 5, 6],
 			[7, 8, 9],
-
 			[1, 4, 7],
 			[2, 5, 8],
 			[3, 6, 9],
-
 			[1, 5, 9],
 			[3, 5, 7],
 		];
@@ -108,15 +103,21 @@ const displayController = (function () {
 					third = winCondition[i][f].toString();
 				}
 			}
-			console.log(first, second, third);
+
 			if (x.includes(first) && x.includes(second) && x.includes(third)) {
-				return console.log('x player wins');
+				alert('x player wins');
+				return disableGameBoard();
 			} else if (o.includes(first) && o.includes(second) && o.includes(third)) {
-				return console.log('o player wins');
+				alert('o player wins');
+				return disableGameBoard();
 			}
 		}
 	}
 
+	function disableGameBoard() {
+		const gameBoard = document.getElementById('game-board');
+		gameBoard.classList.add('disableDiv');
+	}
 	//public Method
 	return { assignPosition };
 })();
