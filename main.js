@@ -80,9 +80,9 @@ const displayController = (function () {
 	}
 
 	function winCondition(x, o) {
-		console.log('O: ' + gameBoard.infoGameBoardPositionO());
+		console.log('O: ' + o);
 
-		console.log('X: ' + gameBoard.infoGameBoardPositionX());
+		console.log('X: ' + x);
 
 		const winCondition = [
 			[1, 2, 3],
@@ -98,13 +98,20 @@ const displayController = (function () {
 		];
 
 		for (let i = 0; i < winCondition.length; i++) {
-			//NEEDS FIX, dont compare exactly, filter()
-			if (winCondition[i].toString() == x.toString()) {
-				return console.log('x player wins');
+			let first, second, third;
+			for (let f = 0; f < winCondition[i].length; f++) {
+				if (f == 0) {
+					first = winCondition[i][f].toString();
+				} else if (f == 1) {
+					second = winCondition[i][f].toString();
+				} else if (f == 2) {
+					third = winCondition[i][f].toString();
+				}
 			}
-		}
-		for (let i = 0; i < winCondition.length; i++) {
-			if (winCondition[i].toString() == o.toString()) {
+			console.log(first, second, third);
+			if (x.includes(first) && x.includes(second) && x.includes(third)) {
+				return console.log('x player wins');
+			} else if (o.includes(first) && o.includes(second) && o.includes(third)) {
 				return console.log('o player wins');
 			}
 		}
