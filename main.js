@@ -98,20 +98,18 @@ const displayController = (function () {
 			}
 			if (x.includes(first) && x.includes(second) && x.includes(third)) {
 				alert('x player wins');
-				return disableGameBoard();
+				disableGameBoard();
+				return players.restart();
 			} else if (o.includes(first) && o.includes(second) && o.includes(third)) {
 				alert('o player wins');
-				return disableGameBoard();
+				disableGameBoard();
+				return players.restart();
 			}
 		}
 	}
 	function disableGameBoard() {
 		const gameBoard = document.getElementById('game-board');
 		gameBoard.classList.add('disableDiv');
-	}
-	function restart() {
-		const restartBtn = document.getElementById('restartBtn');
-		restartBtn.style.display = ''; //none to something
 	}
 	//public Method
 	return { assignPosition };
@@ -125,10 +123,8 @@ const players = (function () {
 		let playerNameInput = document.getElementById('my-form');
 		let player1NameDisplay = document.getElementById('player1-display');
 		let player2NameDisplay = document.getElementById('player2-display');
-
 		submitBtn.onclick = () => {
 			modal.style.display = 'none';
-
 			if (playerNameInput[0].value && playerNameInput[1].value) {
 				player1NameDisplay.textContent = `Player X : ${playerNameInput[0].value}`;
 				player2NameDisplay.textContent = `Player O : ${playerNameInput[1].value}`;
@@ -142,15 +138,13 @@ const players = (function () {
 	}
 	function restart() {
 		const restartBtn = document.getElementById('restartBtn');
-
+		restartBtn.style.display = 'inline';
 		restartBtn.onclick = () => {
 			location.reload();
 		};
 	}
-
 	//public Method
 	return { getPlayerNames, restart };
 })();
 
 players.getPlayerNames();
-players.restart();

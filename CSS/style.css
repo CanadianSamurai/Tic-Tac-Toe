@@ -2,19 +2,34 @@ body {
 	text-align: center;
 }
 
+.player-input {
+	font-size: 15px;
+	border-radius: 10px;
+}
+
+#submit {
+	font-size: 20px;
+	margin: 10px;
+	border-radius: 10px;
+}
+
 #game-board {
 	margin: auto;
 	margin-top: 100px;
 	background: turquoise;
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr;
+	grid-template-rows: 1fr 1fr 1fr;
 	height: 400px;
 	width: 400px;
 }
 
 .board-box {
-	border: 1px solid black;
-	text-align: center;
+	/* centers text inside div */
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border: 0.1px solid black;
 	font-size: 30px;
 }
 
@@ -22,18 +37,14 @@ body {
 	pointer-events: none;
 }
 
-.players {
-}
-
 .player-display {
 	display: inline;
-
 	font-size: 20px;
 	margin: 50px;
 }
 
 #restartBtn {
-	/* display: none;  */
+	display: none;
 }
 
 /* Player name input  */
@@ -51,12 +62,13 @@ body {
 }
 
 .modal-content {
+	font-size: 20px;
 	background-color: #fefefe;
-	border-radius: 5px;
+	border-radius: 50%;
 	margin: 15% auto; /* 15% from the top and centered */
 	padding: 20px;
 	border: 1px solid #888;
-	width: 50%; /* Could be more or less, depending on screen size */
+	width: 200px; /* Could be more or less, depending on screen size */
 	animation-name: animatetop;
 	animation-duration: 0.4s;
 }
