@@ -5,7 +5,6 @@ const gameBoard = (function () {
 	let _gameBoardTicks = [];
 	let _gameBoardPositionX = [];
 	let _gameBoardPositionO = [];
-
 	function storePosition(boxId, xO) {
 		if (xO == 'o') {
 			_gameBoardPositionO.push(boxId);
@@ -13,25 +12,20 @@ const gameBoard = (function () {
 			_gameBoardPositionX.push(boxId);
 		}
 	}
-
 	function pushToGameBoardTicks(input) {
 		_gameBoardTicks.push(input);
 	}
-
 	function infoGameBoardTicks() {
 		return _gameBoardTicks;
 	}
-
 	function infoGameBoardPositionX() {
 		const sortedNum = _gameBoardPositionX.sort();
 		return sortedNum;
 	}
-
 	function infoGameBoardPositionO() {
 		const sortedNum = _gameBoardPositionO.sort();
 		return sortedNum;
 	}
-
 	//public Method
 	return {
 		storePosition,
@@ -45,7 +39,7 @@ const gameBoard = (function () {
 const displayController = (function () {
 	//private Method
 	const boxes = Array.from(document.getElementsByClassName('board-box'));
-	const listenToBoxes = boxes.forEach(box => {
+	boxes.forEach(box => {
 		box.addEventListener('click', assignPosition);
 	});
 	function assignPosition(e) {
@@ -91,7 +85,6 @@ const displayController = (function () {
 			[1, 5, 9],
 			[3, 5, 7],
 		];
-
 		for (let i = 0; i < winCondition.length; i++) {
 			let first, second, third;
 			for (let f = 0; f < winCondition[i].length; f++) {
@@ -103,7 +96,6 @@ const displayController = (function () {
 					third = winCondition[i][f].toString();
 				}
 			}
-
 			if (x.includes(first) && x.includes(second) && x.includes(third)) {
 				alert('x player wins');
 				return disableGameBoard();
@@ -113,13 +105,40 @@ const displayController = (function () {
 			}
 		}
 	}
-
 	function disableGameBoard() {
 		const gameBoard = document.getElementById('game-board');
 		gameBoard.classList.add('disableDiv');
+	}
+	function restart() {
+		const restartBtn = document.getElementById('restartBtn');
+		restartBtn.style.display = ''; //none to something
 	}
 	//public Method
 	return { assignPosition };
 })();
 
-function players() {}
+const players = (function () {
+	//private Methods
+	function getPlayerNames() {
+		const modal = document.getElementById('modalPlayerNames');
+		const player1NameInput = document.getElementById('player1').value;
+		const player2NameInput = document.getElementById('player2').value;
+		const submitBtn = document.getElementById('submit');
+		const player1NameDisplay = document.getElementById('player1-display');
+		const player2NameDisplay = document.getElementById('player2-display');
+
+		submitBtn.onclick = () => {
+			console.log('test');
+			modal.style.display = 'none';
+
+			//!!change player display names to input values
+
+			return false; //prevents page refresh
+		};
+	}
+
+	//public Method
+	return { getPlayerNames };
+})();
+
+players.getPlayerNames();
