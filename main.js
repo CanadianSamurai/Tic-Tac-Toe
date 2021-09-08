@@ -140,9 +140,17 @@ const players = (function () {
 			return false; //prevents page refresh
 		};
 	}
+	function restart() {
+		const restartBtn = document.getElementById('restartBtn');
+
+		restartBtn.onclick = () => {
+			location.reload();
+		};
+	}
 
 	//public Method
-	return { getPlayerNames };
+	return { getPlayerNames, restart };
 })();
 
 players.getPlayerNames();
+players.restart();
