@@ -121,18 +121,22 @@ const players = (function () {
 	//private Methods
 	function getPlayerNames() {
 		const modal = document.getElementById('modalPlayerNames');
-		const player1NameInput = document.getElementById('player1').value;
-		const player2NameInput = document.getElementById('player2').value;
 		const submitBtn = document.getElementById('submit');
-		const player1NameDisplay = document.getElementById('player1-display');
-		const player2NameDisplay = document.getElementById('player2-display');
+		let playerNameInput = document.getElementById('my-form');
+		let player1NameDisplay = document.getElementById('player1-display');
+		let player2NameDisplay = document.getElementById('player2-display');
 
 		submitBtn.onclick = () => {
-			console.log('test');
 			modal.style.display = 'none';
 
-			//!!change player display names to input values
-
+			if (playerNameInput[0].value && playerNameInput[1].value) {
+				player1NameDisplay.textContent = `Player X : ${playerNameInput[0].value}`;
+				player2NameDisplay.textContent = `Player O : ${playerNameInput[1].value}`;
+			} else if (playerNameInput[1].value) {
+				player2NameDisplay.textContent = `Player X : ${playerNameInput[1].value}`;
+			} else if (playerNameInput[0].value) {
+				player1NameDisplay.textContent = `Player O : ${playerNameInput[0].value}`;
+			}
 			return false; //prevents page refresh
 		};
 	}
