@@ -1,8 +1,12 @@
 body {
+	font-family: 'Lobster', cursive;
 	text-align: center;
+	background-color: black;
+	color: white;
 }
 
 .player-input {
+	font-family: 'Lobster', cursive;
 	font-size: 15px;
 	border-radius: 10px;
 }
@@ -16,12 +20,13 @@ body {
 #game-board {
 	margin: auto;
 	margin-top: 100px;
-	background: turquoise;
+	background: white;
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr;
 	grid-template-rows: 1fr 1fr 1fr;
 	height: 400px;
 	width: 400px;
+	text-shadow: 10px 20px 0.5rem rgba(87, 85, 85, 0.459);
 }
 
 .board-box {
@@ -30,7 +35,8 @@ body {
 	align-items: center;
 	justify-content: center;
 	border: 0.1px solid black;
-	font-size: 30px;
+	font-size: 100px;
+	color: black;
 }
 
 .disableDiv {
@@ -39,7 +45,7 @@ body {
 
 .player-display {
 	display: inline;
-	font-size: 20px;
+	font-size: 30px;
 	margin: 50px;
 }
 
@@ -49,7 +55,7 @@ body {
 
 /* Player name input  */
 .modal {
-	/* display: none; Hidden by default */
+	display: none; /* Hidden by default */
 	position: fixed; /* Stay in place */
 	z-index: 1; /* Sit on top */
 	left: 0;
@@ -63,6 +69,7 @@ body {
 
 .modal-content {
 	font-size: 20px;
+	font-family: 'Lobster', cursive;
 	background-color: #fefefe;
 	border-radius: 50%;
 	margin: 15% auto; /* 15% from the top and centered */
@@ -71,4 +78,8 @@ body {
 	width: 200px; /* Could be more or less, depending on screen size */
 	animation-name: animatetop;
 	animation-duration: 0.4s;
+}
+
+#submit {
+	font-family: 'Lobster', cursive;
 }

@@ -123,6 +123,7 @@ const players = (function () {
 		let playerNameInput = document.getElementById('my-form');
 		let player1NameDisplay = document.getElementById('player1-display');
 		let player2NameDisplay = document.getElementById('player2-display');
+		modal.style.display = 'block';
 		submitBtn.onclick = () => {
 			modal.style.display = 'none';
 			if (playerNameInput[0].value && playerNameInput[1].value) {
@@ -147,4 +148,4 @@ const players = (function () {
 	return { getPlayerNames, restart };
 })();
 
-players.getPlayerNames();
+// players.getPlayerNames();
