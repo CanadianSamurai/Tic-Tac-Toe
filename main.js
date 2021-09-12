@@ -57,6 +57,7 @@ const displayController = (function () {
 			gameBoard.infoGameBoardPositionX(),
 			gameBoard.infoGameBoardPositionO()
 		);
+		tieCondition();
 	}
 	function xOLogic() {
 		if (
@@ -105,6 +106,18 @@ const displayController = (function () {
 				disableGameBoard();
 				return players.restart();
 			}
+		}
+	}
+	function tieCondition() {
+		const isBoardFilled = boxes.every(box => {
+			if (box.textContent) {
+				return true;
+			}
+		});
+		if (isBoardFilled) {
+			alert(`It's a tie`);
+			disableGameBoard();
+			return players.restart();
 		}
 	}
 	function disableGameBoard() {
