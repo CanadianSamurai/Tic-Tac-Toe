@@ -58,6 +58,8 @@ const displayController = (function () {
 			gameBoard.infoGameBoardPositionO()
 		);
 		tieCondition();
+
+		computer.finalOutput();
 	}
 	function xOLogic() {
 		if (
@@ -162,3 +164,32 @@ const players = (function () {
 })();
 
 // players.getPlayerNames();
+
+const computer = (function () {
+	const boxes = Array.from(document.getElementsByClassName('board-box'));
+
+	function computeEmptyTiles() {
+		//loop, check empty textcontext, return array of empty tiles
+		const emptyTiles = boxes.filter(box => !box.textContent);
+		const getId = emptyTiles.map(tile => tile.id);
+		return getId;
+	}
+	function randomizeId() {
+		const randomizeIds = computeEmptyTiles();
+		console.log(randomizeIds);
+	}
+	function click() {
+		//click on randomized tile
+
+		const div1 = document.getElementById('1');
+		div1.click();
+	}
+	function finalOutput() {
+		computeEmptyTiles();
+		randomizeId();
+	}
+
+	return { finalOutput };
+})();
+
+computer.finalOutput();
