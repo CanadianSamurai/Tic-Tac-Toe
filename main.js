@@ -58,9 +58,8 @@ const displayController = (function () {
 			gameBoard.infoGameBoardPositionO()
 		);
 		tieCondition();
-		if (e.target.textContent == 'x') {
-			computer.finalOutput();
-		}
+
+		computer.finalOutput(e);
 	}
 	function xOLogic() {
 		if (
@@ -171,30 +170,43 @@ const players = (function () {
 const computer = (function () {
 	const boxes = Array.from(document.getElementsByClassName('board-box'));
 
-	function computeEmptyTiles() {
-		//loop, check empty textcontext, return array of empty tiles
-		const emptyTiles = boxes.filter(box => !box.textContent);
-		const getId = emptyTiles.map(tile => tile.id);
-		return getId;
+	function combineXOdata() {
+		//find Ids that are not taken
+		const allTileIds = ['1', '2', '3', '4', '5', '6', '7', '8', '9'];
+		const xoCombined = [
+			...gameBoard.infoGameBoardPositionO(),
+			...gameBoard.infoGameBoardPositionX(),
+		];
+
+		for (let i = 0; i < allTileIds.length; i++) {
+			const index = allTileIds.indexOf(xoCombined[i]);
+			if (index !== -1) {
+				allTileIds.splice(index, 1);
+			}
+		}
+		console.log(`after: ${allTileIds}`);
+		return allTileIds; //final result of spliced array
 	}
 	function randomizeId() {
-		const randomizeIds = computeEmptyTiles();
-		const randomizedIds = (
-			Math.floor(Math.random() * randomizeIds.length) + 1
-		).toString();
-		console.log(`randomizedId: ${randomizedIds}`);
-
-		return randomizedIds;
+		let randomizeIds = combineXOdata();
+		let randomizedId = Math.floor(Math.random() * randomizeIds.length);
+		const choosenId = randomizeIds[randomizedId];
+		console.log(`randomizedId: ${choosenId}`);
+		return choosenId;
 	}
 	function click() {
 		//click on randomized tile
 		let randomizedId = randomizeId();
 		let choosenDiv = document.getElementById(randomizedId);
-		console.log(`choosenDIv: ${choosenDiv}`);
 		choosenDiv.click();
 	}
-	function finalOutput() {
-		click();
+	function finalOutput(e) {
+		//delay comuter play on tile
+		if (e.target.textContent == 'x') {
+			setTimeout(function () {
+				click();
+			}, 200);
+		}
 	}
 
 	return { finalOutput };
