@@ -38,6 +38,7 @@ const gameBoard = (function () {
 
 const displayController = (function () {
 	//private Method
+	let playerWon = false;
 	const boxes = Array.from(document.getElementsByClassName('board-box'));
 	boxes.forEach(box => {
 		box.addEventListener('click', assignPosition);
@@ -50,7 +51,6 @@ const displayController = (function () {
 		}
 		const xO = xOLogic();
 		gameBoard.storePosition(boxId, xO);
-
 		gameBoard.pushToGameBoardTicks(xO);
 		displayTick(xO, boxId);
 		winCondition(
@@ -58,8 +58,9 @@ const displayController = (function () {
 			gameBoard.infoGameBoardPositionO()
 		);
 		tieCondition();
-
-		computer.finalOutput();
+		if (e.target.textContent == 'x') {
+			computer.finalOutput();
+		}
 	}
 	function xOLogic() {
 		if (
@@ -101,10 +102,12 @@ const displayController = (function () {
 			}
 			if (x.includes(first) && x.includes(second) && x.includes(third)) {
 				alert('x player wins');
+				playerWon = true;
 				disableGameBoard();
 				return players.restart();
 			} else if (o.includes(first) && o.includes(second) && o.includes(third)) {
 				alert('o player wins');
+				playerWon = true;
 				disableGameBoard();
 				return players.restart();
 			}
@@ -116,7 +119,7 @@ const displayController = (function () {
 				return true;
 			}
 		});
-		if (isBoardFilled) {
+		if (isBoardFilled && playerWon == false) {
 			alert(`It's a tie`);
 			disableGameBoard();
 			return players.restart();
@@ -176,20 +179,23 @@ const computer = (function () {
 	}
 	function randomizeId() {
 		const randomizeIds = computeEmptyTiles();
-		console.log(randomizeIds);
+		const randomizedIds = (
+			Math.floor(Math.random() * randomizeIds.length) + 1
+		).toString();
+		console.log(`randomizedId: ${randomizedIds}`);
+
+		return randomizedIds;
 	}
 	function click() {
 		//click on randomized tile
-
-		const div1 = document.getElementById('1');
-		div1.click();
+		let randomizedId = randomizeId();
+		let choosenDiv = document.getElementById(randomizedId);
+		console.log(`choosenDIv: ${choosenDiv}`);
+		choosenDiv.click();
 	}
 	function finalOutput() {
-		computeEmptyTiles();
-		randomizeId();
+		click();
 	}
 
 	return { finalOutput };
 })();
-
-computer.finalOutput();
