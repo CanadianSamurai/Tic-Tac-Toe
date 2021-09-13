@@ -50,13 +50,14 @@ const displayController = (function () {
 			return;
 		}
 		const xO = xOLogic();
-		gameBoard.storePosition(boxId, xO);
-		gameBoard.pushToGameBoardTicks(xO);
-		displayTick(xO, boxId);
 		winCondition(
 			gameBoard.infoGameBoardPositionX(),
 			gameBoard.infoGameBoardPositionO()
 		);
+		gameBoard.storePosition(boxId, xO);
+		gameBoard.pushToGameBoardTicks(xO);
+		displayTick(xO, boxId);
+
 		tieCondition();
 
 		computer.finalOutput(e);
